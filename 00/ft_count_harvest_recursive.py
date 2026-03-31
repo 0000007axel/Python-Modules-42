@@ -1,10 +1,11 @@
-days = int(input("Days until harvest: "))
-
-def count_recursive (day):
-    i = 1
-    if i < days:
-        print("Day ", i)
+def recursive_engine(day, max_days):
+    if day <= max_days:
+        print("Day ", day)
+        recursive_engine(day + 1, max_days)
     else:
-        count_recursive(days-i)
+        print("Harvest time!")
 
-count_recursive(days)
+
+def ft_count_harvest_recursive():
+    max_days = int(input("Days until harvest: "))
+    recursive_engine(1, max_days)
