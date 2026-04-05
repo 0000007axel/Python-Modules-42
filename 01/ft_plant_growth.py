@@ -6,8 +6,12 @@ class Plant:
 
     def grow(self, height: int) -> None:
         for i in range(1, 7):
+            self.height += 0.8
+            print(f"{self.height}")
 
     def age(self, height: int) -> None:
+        self.age += 1
+        print(f"{self.age} days")
 
     def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.age} days old")
@@ -19,5 +23,6 @@ def ft_plant_growth() -> None:
     print("=== Garden Plant Growth ===")
 
 if __name__ == "__main__":
+    plant_growth()
 
     ft_plant_growth()
