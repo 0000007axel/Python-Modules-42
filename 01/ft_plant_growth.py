@@ -21,8 +21,10 @@ class Plant:
 
 def ft_plant_growth() -> None:
     print("=== Garden Plant Growth ===")
+    plant1 = Plant("Tulip", 20, 5)
+    plant1.age()
+    plant1.grow()
+    plant.show()
 
 if __name__ == "__main__":
-    plant_growth()
-
     ft_plant_growth()
