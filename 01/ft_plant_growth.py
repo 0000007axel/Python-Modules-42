@@ -4,7 +4,7 @@ class Plant:
         self.plant_height = plant_height
         self.plant_age = plant_age
 
-    def grow(self, grow_size : int) -> None:
+    def grow(self, grow_size : float) -> None:
         self.plant_height = round((self.plant_height + grow_size), 1)
 
     def age(self) -> None:
@@ -19,7 +19,7 @@ def ft_plant_growth() -> None:
     original_height = plant1.plant_height
     plant1.show()
     for i in range(1, 8):
-        print(f"===Day {i}===")
+        print(f"=== Day {i} ===")
         plant1.grow(0.8)
         plant1.age()
         plant1.show()
