@@ -14,7 +14,7 @@ class Plant:
         print(f"{self.plant_name}: {self.plant_height}cm, {self.plant_age} days old")
 
 def ft_plant_growth() -> None:
-    print("=== Garden Plant Growth ===")
+print("=== Garden Plant Growth ===")
     plant1 = Plant("Roses", 25.0, 30)
     original_height = plant1.plant_height
     plant1.show()
