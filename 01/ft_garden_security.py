@@ -29,7 +29,7 @@ class Plant:
         return self._plant_age
 
     def grow(self, grow_size: float) -> None:
-        self._plant_height = round((self._plant_height + grow_size), 1)
+        self.set_height(round((self._plant_height + grow_size), 1))
 
     def age(self) -> None:
         self.set_age(self.get_age() + 1)
