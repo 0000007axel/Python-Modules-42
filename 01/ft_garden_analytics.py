@@ -1,6 +1,6 @@
 class Plant:
     class Count:
-        def __init__(self):
+        def __init__(self) -> None:
             self._grow_count = 0
             self._age_count = 0
             self._show_count = 0
@@ -22,6 +22,12 @@ class Plant:
 
         def get_show_count(self) -> int:
             return self._show_count
+
+        def display_stats(self, plant: 'Plant') -> None:
+            print(f"[statistics for {plant.get_name().capitalize()}]")
+            print(f"Stats: {plant._counter.get_grow_count()} grow, ", end="")
+            print(f"{plant._counter.get_age_count()} age, ", end="")
+            print(f"{plant._counter.get_show_count()} show")
             
     def __init__(self,
                  plant_name: str,
@@ -70,6 +76,9 @@ class Plant:
         print(f"{self._plant_name.capitalize()}: ", end="")
         print(f"{self._plant_height}cm, {self._plant_age} days old")
 
+    def show_stats(self) -> None:
+        self._counter.display_stats(self)
+
     @staticmethod
     def is_year(x: int) -> bool:
         if x > 365:
@@ -90,21 +99,21 @@ class Flower(Plant):
                  plant_age: int,
                  color: str) -> None:
         super().__init__(plant_name, plant_height, plant_age)
-        self.color = color
-        self.bloomstate = False
+        self._color = color
+        self._bloomstate = False
 
     def bloom(self) -> None:
-        if self.bloomstate is True:
+        if self._bloomstate is True:
             print(f" {self._plant_name.capitalize()} is blooming beautifully")
 
         else:
             print(f"[asking the {self._plant_name} to bloom]")
-            self.bloomstate = True
+            self._bloomstate = True
 
     def show(self) -> None:
         super().show()
-        print(f" Color: {self.color}")
-        if self.bloomstate is True:
+        print(f" Color: {self._color}")
+        if self._bloomstate is True:
             print(f" {self.get_name().capitalize()} is blooming beautifully!")
         else:
             print(f" {self.get_name().capitalize()} has not bloomed yet")
@@ -112,11 +121,11 @@ class Flower(Plant):
     def grow_bloom(self, grow_size: float) -> None:
         print(f"[asking the {self.get_name()} to grow and bloom]")
         super().grow(grow_size)
-        if self.bloomstate is True:
+        if self._bloomstate is True:
             print(f" {self._plant_name.capitalize()} is blooming beautifully")
 
         else:
-            self.bloomstate = True
+            self._bloomstate = True
 
 
 class Seed(Flower):
@@ -136,12 +145,7 @@ class Seed(Flower):
         print(f"[make {self.get_name()} grow, age and bloom]")
         super().grow(grow_size)
         super().age(days)
-        if self.bloomstate is True:
-            print(f" {self._plant_name.capitalize()} is blooming beautifully")
-
-        else:
-            self.bloomstate = True
-
+        self.bloom()
 
     def show(self) -> None:
         super().show()
@@ -160,6 +164,10 @@ class Tree(Plant):
         def add_shade(self) -> None:
             self._shade_produced += 1
 
+        def display_stats(self, plant: 'Plant') -> None:
+            super().display_stats(plant)
+            print(f"Shade: {self.get_shade()}")
+
     def __init__(self,
                  plant_name: str,
                  plant_height: float,
@@ -167,7 +175,6 @@ class Tree(Plant):
                  trunk_diameter: float):
         super().__init__(plant_name, plant_height, plant_age)
         self.trunk_diameter = trunk_diameter
-        self.produced_shade = 0.0
         self._counter = Tree.Count()
 
     def show(self) -> None:
@@ -207,11 +214,7 @@ class Vegetable(Plant):
 
 
 def display_plant_stats(plant: Plant) -> None:       
-    print(f"[statistics for {plant.get_name().capitalize()}]")
-    print(f"Stats: {plant._counter._grow_count} grow, ", end="")
-    print(f"{plant._counter._age_count} age, ", end="")
-    print(f"{plant._counter._show_count} show")
-
+    plant.show_stats()
 
 def ft_garden_analytics() -> None:
     print("=== Garden statistics ===")
@@ -232,6 +235,7 @@ def ft_garden_analytics() -> None:
     oak.show()
     display_plant_stats(oak)
     oak.produce_shade()
+    display_plant_stats(oak)
 
     print("\n=== Seed")
     sunflower = Seed("sunflower", 80.0, 45, "yellow")
