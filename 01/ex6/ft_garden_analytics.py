@@ -28,7 +28,7 @@ class Plant:
             print(f"Stats: {plant._counter.get_grow_count()} grow, ", end="")
             print(f"{plant._counter.get_age_count()} age, ", end="")
             print(f"{plant._counter.get_show_count()} show")
-            
+
     def __init__(self,
                  plant_name: str,
                  plant_height: float,
@@ -213,8 +213,9 @@ class Vegetable(Plant):
         print(f" Nutritional value: {self.nutritional_value}")
 
 
-def display_plant_stats(plant: Plant) -> None:       
+def display_plant_stats(plant: Plant) -> None:
     plant.show_stats()
+
 
 def ft_garden_analytics() -> None:
     print("=== Garden statistics ===")
@@ -243,12 +244,10 @@ def ft_garden_analytics() -> None:
     sunflower.grow_age_bloom(30.0, 20)
     sunflower.show()
     display_plant_stats(sunflower)
-    
     print("\n=== Anonymous")
     unknown = Plant.create_anonymous()
     unknown.show()
     display_plant_stats(unknown)
-
 
 
 if __name__ == "__main__":

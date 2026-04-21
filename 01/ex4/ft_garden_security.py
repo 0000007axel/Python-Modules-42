@@ -37,4 +37,3 @@ class Plant:
     def show(self) -> None:
         print(f"{self._plant_name}:", end="")
         print(f"{self._plant_height}cm, {self._plant_age} days old")
-
