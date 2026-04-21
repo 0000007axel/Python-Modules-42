@@ -1,19 +1,19 @@
 class GardenError(Exception):
     def __init__(self,
-                 message : str = "Unknown Garden Error") -> None:
+                 message: str = "Unknown Garden Error") -> None:
         self.message = message
         super().__init__(message)
 
 
 class PlantError(GardenError):
     def __init__(self,
-                 message : str = "Unknown Plant Error") -> None:
+                 message: str = "Unknown Plant Error") -> None:
         super().__init__(message)
 
 
 class WaterError(GardenError):
     def __init__(self,
-                 message : str = "Unkown Water Error") -> None:
+                 message: str = "Unkown Water Error") -> None:
         super().__init__(message)
 
 
@@ -33,9 +33,8 @@ def ft_custom_errors() -> None:
     except WaterError as err:
         print(f"Caught {type(err).__name__}: {err}")
 
-
     print("\nTesting catching all garden errors...")
-    for i in range (2):
+    for i in range(2):
         try:
             if i == 0:
                 raise GardenError("The tomato plant is wilting!")
@@ -45,6 +44,7 @@ def ft_custom_errors() -> None:
             print(f"Caught {type(err).__name__}: {err}")
 
     print("\nAll custom error types work correctly!")
+
 
 if __name__ == "__main__":
     ft_custom_errors()

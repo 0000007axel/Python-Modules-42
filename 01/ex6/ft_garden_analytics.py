@@ -154,7 +154,7 @@ class Seed(Flower):
 
 class Tree(Plant):
     class Count(Plant.Count):
-        def __init__(self):
+        def __init__(self) -> None:
             super().__init__()
             self._shade_produced = 0
 
@@ -175,7 +175,7 @@ class Tree(Plant):
                  trunk_diameter: float):
         super().__init__(plant_name, plant_height, plant_age)
         self.trunk_diameter = trunk_diameter
-        self._counter = Tree.Count()
+        self._counter: Tree.Count = Tree.Count()
 
     def show(self) -> None:
         super().show()
