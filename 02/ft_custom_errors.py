@@ -21,7 +21,7 @@ def ft_custom_errors() -> None:
     print("=== Custom Garden Errors Demo ===")
     print("\nTesting PlantError...")
     try:
-        raise PlantError("The tomato plant is wailing!")
+        raise PlantError("The tomato plant is wilting!")
 
     except PlantError as err:
         print(f"Caught {type(err).__name__}: {err}")
@@ -38,7 +38,7 @@ def ft_custom_errors() -> None:
     for i in range (2):
         try:
             if i == 0:
-                raise GardenError("The tomato plant is wailing!")
+                raise GardenError("The tomato plant is wilting!")
             elif i == 1:
                 raise GardenError("Not enough water in the tank!")
         except GardenError as err:
