@@ -25,8 +25,8 @@ def get_player_pos() -> tuple[float, float, float]:
 def calculate_distance(p1: tuple[float, float, float],
                        p2: tuple[float, float, float]) -> float:
     dist: float = round(math.sqrt((p2[0]-p1[0])**2
-                            + (p2[1]-p1[1])**2
-                            + (p2[2]-p1[2])**2),
+                                  + (p2[1]-p1[1])**2
+                                  + (p2[2]-p1[2])**2),
                         4)
     return dist
 
@@ -42,7 +42,6 @@ def main() -> None:
     set2: tuple[float, float, float] = get_player_pos()
     print(f"Distance between the 2 sets of coordinates: "
           f"{calculate_distance(set1, set2)}")
-
 
 
 if __name__ == "__main__":

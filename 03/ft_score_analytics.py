@@ -6,12 +6,12 @@ def create_list() -> list[int]:
     for i in range(0, len(sys.argv) - 1):
         try:
             scores.append(int(sys.argv[i + 1]))
-        except ValueError as err:
+        except ValueError:
             print(f"Invalid parameter: '{sys.argv[i + 1]}'")
     if len(scores) > 0:
         print(f"Scores processed: {scores}")
     else:
-        print("No scores provided. ", end="") 
+        print("No scores provided. ", end="")
         print("Usage: python3 ft_score_analytics.py, <score1> <score2> ...")
     return scores
 
