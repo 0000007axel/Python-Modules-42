@@ -71,9 +71,13 @@ def main() -> None:
     print(p4.get_achievements().difference(p1.get_achievements(),
                                            p3.get_achievements(),
                                            p4.get_achievements()))
-    print(f"\n{p1.get_name()} is missing: {achievements.difference(p1.get_achievements())}")
-    print(f"{p2.get_name()} is missing: {achievements.difference(p2.get_achievements())}")
-    print(f"{p3.get_name()} is missing: {achievements.difference(p3.get_achievements())}")
-    print(f"{p4.get_name()} is missing: {achievements.difference(p4.get_achievements())}")
+    print(f"\n{p1.get_name()} is missing: "
+          f"{achievements.difference(p1.get_achievements())}")
+    print(f"{p2.get_name()} is missing: "
+          f"{achievements.difference(p2.get_achievements())}")
+    print(f"{p3.get_name()} is missing: "
+          f"{achievements.difference(p3.get_achievements())}")
+    print(f"{p4.get_name()} is missing: "
+          f"{achievements.difference(p4.get_achievements())}")
 if __name__ == "__main__":
     main()
