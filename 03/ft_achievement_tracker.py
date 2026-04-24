@@ -43,17 +43,29 @@ def main() -> None:
     p3.show_achievements()
     p4.show_achievements()
     print("\nAll distinct achievements: ", end="")
-    print(p1.get_achievements().intersection(p2.get_achievements(),
+    print(p1.get_achievements().union(p2.get_achievements(),
                                              p3.get_achievements(),
                                              p4.get_achievements()))
     print("\nCommon achievements: ", end="")
     print(p1.get_achievements().intersection(p2.get_achievements(),
                                              p3.get_achievements(),
                                              p4.get_achievements()))
-    print(f"\nOnly {p1.get_name()} has :{p1.get_achievements().difference(p2.get_achievements(), p3.get_achievements(), p4.get_achievements())}")
-    print(f"Only {p2.get_name()} has :{p2.get_achievements().difference(p1.get_achievements(), p3.get_achievements(), p4.get_achievements())}")
-    print(f"Only {p3.get_name()} has :{p3.get_achievements().difference(p2.get_achievements(), p3.get_achievements(), p4.get_achievements())}")
-    print(f"Only {p4.get_name()} has :{p4.get_achievements().difference(p1.get_achievements(), p3.get_achievements(), p4.get_achievements())}")
+    print(f"\nOnly {p1.get_name()} has: ", end="")
+    print(p1.get_achievements().difference(p2.get_achievements(),
+                                           p3.get_achievements(),
+                                           p4.get_achievements()))
+    print(f"Only {p2.get_name()} has: ", end="")
+    print(p2.get_achievements().difference(p1.get_achievements(),
+                                           p3.get_achievements(),
+                                           p4.get_achievements()))
+    print(f"Only {p3.get_name()} has: ", end="")
+    print(p3.get_achievements().difference(p2.get_achievements(),
+                                           p3.get_achievements(),
+                                           p4.get_achievements()))
+    print(f"Only {p4.get_name()} has: ", end="")
+    print(p4.get_achievements().difference(p1.get_achievements(),
+                                           p3.get_achievements(),
+                                           p4.get_achievements()))
 
 if __name__ == "__main__":
     main()
