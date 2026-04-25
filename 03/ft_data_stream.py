@@ -17,9 +17,12 @@ def create_event_list(names: list[str], actions: list[str]) -> list[tuple[str, s
     return (events_list)
 
 
-def consume_event(events_list: list[tuple[str, str]]) -> None:
-    to_remove: tuple[str, str] = random.choice(events_list)
-    print(f"Got event from list: {to_remove}")
+def consume_event(events_list: list[tuple[str, str]]) -> typing.Generator:
+    while True:
+        to_remove: tuple[str, str] = random.choice(events_list)
+        print(f"Got event from list: {to_remove}")
+        events_list.remove(to_remove)
+        yield (events_list)
 
 
 def main() -> None:
@@ -37,12 +40,13 @@ def main() -> None:
                         "alice",
                         "dylan",
                         "charlie"]
-
     event = gen_event(names, actions)
     for i in range(1000):
         print(f"Event {i}: Player {next(event)[0]} did action {next(event)[1]}")
     events_list = create_event_list(names, actions)
     print(f"Built list of 10 events: {events_list}")
+    while len(events_list) > 0:
+        print(f"Remains in list: {next(consume_event(events_list))}")
 
 
 if __name__ == "__main__":
