@@ -2,14 +2,16 @@ import random
 import typing
 
 
-def gen_event(names: list[str], actions: list[str]) -> typing.Generator:
+def gen_event(names: list[str],
+              actions: list[str]) -> typing.Generator:
     while True:
         rand_name: str = random.choice(names)
         rand_action: str = random.choice(actions)
         yield (rand_name, rand_action)
 
 
-def create_event_list(names: list[str], actions: list[str]) -> list[tuple[str, str]]:
+def create_event_list(names: list[str],
+                      actions: list[str]) -> list[tuple[str, str]]:
     events_list: list[tuple[str, str]] = []
     event = gen_event(names, actions)
     for _ in range(10):
@@ -42,7 +44,8 @@ def main() -> None:
                         "charlie"]
     event = gen_event(names, actions)
     for i in range(1000):
-        print(f"Event {i}: Player {next(event)[0]} did action {next(event)[1]}")
+        print(f"Event {i}: Player {next(event)[0]} "
+              f"did action {next(event)[1]}")
     events_list = create_event_list(names, actions)
     print(f"Built list of 10 events: {events_list}")
     while len(events_list) > 0:
