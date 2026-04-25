@@ -17,7 +17,7 @@ def create_inventory() -> dict[str, int]:
         except ValueError as err2:
             print(f"Quantity error for 'key': {err2}")
     print(f"Got inventory: {inventory}")
-    return(inventory)
+    return (inventory)
 
 
 def main() -> None:
@@ -26,7 +26,8 @@ def main() -> None:
     print(f"Item list: {list(inventory.keys())}")
     print(f"Total quantity of the {len(inventory)} items:"
           f" {sum(inventory.values())}")
-    max_min: tuple[int, int] = (max(inventory.values()), min(inventory.values()))
+    max_min: tuple[int, int] = (max(inventory.values()),
+                                min(inventory.values()))
     max_key: str = ""
     min_key: str = ""
     for item in inventory:
