@@ -2,8 +2,8 @@ import sys
 
 
 def read_file() -> None:
-    file: str = sys.argv[1]
     try:
+        file: str = sys.argv[1]
         print(f"Accessing file '{file}'")
         with open(file) as f:
             print("---\n")
@@ -11,9 +11,13 @@ def read_file() -> None:
             print("---")
         print(f"File '{file}' closed")
     except FileNotFoundError as err1:
-        print(f"Error opening file '{file}': {err1}") 
+        print(f"Error opening file '{file}': {err1}")
     except PermissionError as err2:
         print(f"Error opening file '{file}': {err2}")
+    except IndexError as err3:
+        print(f"Error opening file: {err3}")
+    except Exception as err:
+        print(f"Error opening file: {err}")
 
 
 def main() -> None:
