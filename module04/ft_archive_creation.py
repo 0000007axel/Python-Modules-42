@@ -18,7 +18,7 @@ def main() -> None:
 
     try:
         print(f"Accessing file '{sys.argv[1]}'\n---\n")
-        f = open(sys.argv[1], "r")
+        f: TextIO = open(sys.argv[1], "r")
         orig_text: str = f.read()
         print(orig_text)
         f.close()
@@ -26,10 +26,9 @@ def main() -> None:
         new_text: str = formater(orig_text)
         new_filename: str = input("Enter new file name (or empty): ")
         print(f"Saving data to '{new_filename}'")
-        nf = open(new_filename, "w")
+        nf: TextIO = open(new_filename, "w")
         nf.write(new_text)
         print(f"Data saved in file '{new_filename}'")
-
 
     except Exception as e:
         print(f"Error opening file '{sys.argv[1]}: {e}")
