@@ -1,26 +1,23 @@
 import sys
-
-
-def read_file() -> None:
-    try:
-        file: str = sys.argv[1]
-        print(f"Accessing file '{file}'")
-        with open(file) as f:
-            print("---\n")
-            print(f.read())
-            print("---")
-        print(f"File '{file}' closed")
-    except FileNotFoundError as err1:
-        print(f"Error opening file '{file}': {err1}") 
-    except PermissionError as err2:
-        print(f"Error opening file '{file}': {err2}")
-    except IndexError:
-        print(f"Usage: {sys.argv[0]} <file>")
+from typing import TextIO
 
 
 def main() -> None:
-    print("=== Cyber Archives Recovery ===")
-    read_file()
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <file>")
+        return
+    try:
+        print("=== Cyber Archives Recovery ===")
+        print(f"Accessing file '{sys.argv[1]}'")
+        file: str = sys.argv[1]
+        f: TextIO = open(file, "r")
+        print("---\n")
+        print(f.read())
+        print("\n---")
+        f.close()
+        print(f"File '{sys.argv[1]}' closed")
+    except Exception as e:
+        print(f"Error opening file '{sys.argv[1]}: {e}")
 
 
 if __name__ == "__main__":
