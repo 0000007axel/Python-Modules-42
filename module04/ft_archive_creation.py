@@ -4,7 +4,7 @@ from typing import TextIO
 
 def formater(text: str) -> str:
     print("Transform data\n---\n")
-    new_formated_text: str = text.rstrip().replace("\n", "#\n") + "#"
+    new_formated_text: str = text.replace("\n", "#\n")
     print(new_formated_text)
     print("\n---")
     return (new_formated_text)
