@@ -26,10 +26,15 @@ def main() -> None:
         print(f"\n---\nFile '{sys.argv[1]}' closed\n")
         new_text: str = formater(orig_text)
         new_filename: str = input("Enter new file name (or empty): ")
-        print(f"Saving data to '{new_filename}'")
-        nf: TextIO = open(new_filename, "w")
-        nf.write(new_text)
-        print(f"Data saved in file '{new_filename}'")
+        if len(new_filename) == 0:
+            print("Not saving data")
+            return
+        else:
+            print(f"Saving data to '{new_filename}'")
+            nf: TextIO = open(new_filename, "w")
+            nf.write(new_text)
+            nf.close()
+            print(f"Data saved in file '{new_filename}'")
 
     except Exception as e:
         print(f"Error opening file '{sys.argv[1]}: {e}")
