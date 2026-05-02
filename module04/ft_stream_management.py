@@ -14,7 +14,7 @@ def main() -> None:
     print("=== Cyber Archives Recovery & Preservation===")
 
     if len(sys.argv) != 2:
-        print(f"[STDERR] Usage: {sys.argv[0]} <file>", file = sys.stderr)
+        print(f"[STDERR] Usage: {sys.argv[0]} <file>", file=sys.stderr)
         return
 
     try:
@@ -39,10 +39,12 @@ def main() -> None:
                 nf.close()
                 print(f"Data saved in file '{new_filename}'")
             except Exception as err:
-                print(f"[STDERR] Error opening file {new_filename}: {err}\nData not saved.")
+                print(f"[STDERR] Error opening file {new_filename}: "
+                      f"{err}\nData not saved.")
                 return
     except Exception as e:
-        print(f"[STDERR] Error opening file '{sys.argv[1]}: {e}", file = sys.stderr)
+        print(f"[STDERR] Error opening file '{sys.argv[1]}: {e}",
+              file=sys.stderr)
 
 
 if __name__ == "__main__":
