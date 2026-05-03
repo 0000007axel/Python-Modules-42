@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 class GardenError(Exception):
     def __init__(self,
                  message: str = "Unknown Garden Error") -> None:
@@ -24,24 +27,24 @@ def ft_custom_errors() -> None:
         raise PlantError("The tomato plant is wilting!")
 
     except PlantError as err:
-        print(f"Caught {type(err).__name__}: {err}")
+        print(f"Caught {PlantError.__name__}: {err}")
 
     print("\nTesting WaterError...")
     try:
         raise WaterError("Not enough water in the tank!")
 
     except WaterError as err:
-        print(f"Caught {type(err).__name__}: {err}")
+        print(f"Caught {WaterError.__name__}: {err}")
 
     print("\nTesting catching all garden errors...")
-    for i in range(2):
+    for i in [0, 1]:
         try:
             if i == 0:
                 raise GardenError("The tomato plant is wilting!")
             elif i == 1:
                 raise GardenError("Not enough water in the tank!")
         except GardenError as err:
-            print(f"Caught {type(err).__name__}: {err}")
+            print(f"Caught {GardenError.__name__}: {err}")
 
     print("\nAll custom error types work correctly!")
 

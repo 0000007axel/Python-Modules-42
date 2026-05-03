@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 def input_temperature(temp_str: str) -> int:
     int_temp: int = int(temp_str)
     return (int_temp)

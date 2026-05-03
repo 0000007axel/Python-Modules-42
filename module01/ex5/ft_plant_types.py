@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 class Plant:
     def __init__(self,
                  plant_name: str,
@@ -74,7 +77,7 @@ class Tree(Plant):
                  plant_name: str,
                  plant_height: float,
                  plant_age: int,
-                 trunk_diameter: float):
+                 trunk_diameter: float) -> None:
         super().__init__(plant_name, plant_height, plant_age)
         self.trunk_diameter = trunk_diameter
         print("=== Tree")
@@ -95,7 +98,7 @@ class Vegetable(Plant):
                  plant_name: str,
                  plant_height: float,
                  plant_age: int,
-                 harvest_season: str,):
+                 harvest_season: str,) -> None:
         super().__init__(plant_name, plant_height, plant_age)
         self.harvest_season = harvest_season
         self.nutritional_value = 0

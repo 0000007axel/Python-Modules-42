@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 import random
 
 
@@ -20,30 +23,33 @@ class Player():
 
 def gen_player_achievements(achievements: list[str]) -> set[str]:
     p_achievements: set[str] = set()
-    for _ in range(0, random.randint(1, len(achievements))):
+    achievements_len: int = random.randint(1, len(achievements))
+    i = 0
+    while i < achievements_len:
         p_achievements = p_achievements.union({random.choice(achievements)})
+        i += 1
     return (p_achievements)
 
 
 def main() -> None:
     print("=== Achievement Tracker System ===\n")
-    achievements: set[str] = {'Crafting Genius',
-                              'Strategist',
-                              'World Savior',
-                              'Speed Runner',
-                              'Survivor',
-                              'Master Explorer',
-                              'Treasure Hunter',
-                              'Unstoppable',
-                              'First Steps',
-                              'Collector Supreme',
-                              'Untouchable',
-                              'Sharp Mind',
-                              'Boss Slayer'}
-    p1 = Player("Alice", gen_player_achievements(list(achievements)))
-    p2 = Player("Bob", gen_player_achievements(list(achievements)))
-    p3 = Player("Charlie", gen_player_achievements(list(achievements)))
-    p4 = Player("Dylan", gen_player_achievements(list(achievements)))
+    achievements: list[str] = ['Crafting Genius',
+                               'Strategist',
+                               'World Savior',
+                               'Speed Runner',
+                               'Survivor',
+                               'Master Explorer',
+                               'Treasure Hunter',
+                               'Unstoppable',
+                               'First Steps',
+                               'Collector Supreme',
+                               'Untouchable',
+                               'Sharp Mind',
+                               'Boss Slayer']
+    p1 = Player("Alice", gen_player_achievements(achievements))
+    p2 = Player("Bob", gen_player_achievements(achievements))
+    p3 = Player("Charlie", gen_player_achievements(achievements))
+    p4 = Player("Dylan", gen_player_achievements(achievements))
     p1.show_achievements()
     p2.show_achievements()
     p3.show_achievements()
@@ -73,13 +79,13 @@ def main() -> None:
                                            p3.get_achievements(),
                                            p4.get_achievements()))
     print(f"\n{p1.get_name()} is missing: "
-          f"{achievements.difference(p1.get_achievements())}")
+          f"{set(achievements).difference(p1.get_achievements())}")
     print(f"{p2.get_name()} is missing: "
-          f"{achievements.difference(p2.get_achievements())}")
+          f"{set(achievements).difference(p2.get_achievements())}")
     print(f"{p3.get_name()} is missing: "
-          f"{achievements.difference(p3.get_achievements())}")
+          f"{set(achievements).difference(p3.get_achievements())}")
     print(f"{p4.get_name()} is missing: "
-          f"{achievements.difference(p4.get_achievements())}")
+          f"{set(achievements).difference(p4.get_achievements())}")
 
 
 if __name__ == "__main__":
