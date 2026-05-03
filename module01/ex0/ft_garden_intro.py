@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 def ft_garden_intro() -> None:
     print("=== Welcome to My Garden ===")
     name = "Roses"

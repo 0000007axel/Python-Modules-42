@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 class GardenError(Exception):
     def __init__(self,
                  message: str = "Unknown Garden Error") -> None:
@@ -26,7 +29,7 @@ def test_watering_system() -> None:
         for i in ['Tomato', 'Lettuce', 'Carrots']:
             water_plant(i)
     except PlantError as err:
-        print(f"Caught {type(err).__name__}: {err}")
+        print(f"Caught {PlantError.__name__}: {err}")
         print("...ending tests and returning to main")
         return
     finally:
@@ -37,7 +40,7 @@ def test_watering_system() -> None:
         for i in ['Tomato', 'lettuce', 'Carrots']:
             water_plant(i)
     except PlantError as err:
-        print(f"Caught {type(err).__name__}: {err}")
+        print(f"Caught {PlantError.__name__}: {err}")
         print("...ending tests and returning to main")
         return
     finally:

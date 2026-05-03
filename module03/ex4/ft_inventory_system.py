@@ -1,4 +1,23 @@
+#!/usr/bin/env python3.13
+
+
 import sys
+
+
+def find_max(usr_dict: dict[str, int]) -> int:
+    max_value: int = 0
+    for value in usr_dict.values():
+        if value > max_value:
+            max_value = value
+    return (max_value)
+
+
+def find_min(usr_dict: dict[str, int]) -> int:
+    min_value: int = find_max(usr_dict)
+    for value in usr_dict.values():
+        if value < min_value:
+            min_value = value
+    return (min_value)
 
 
 def create_inventory() -> dict[str, int]:
@@ -26,8 +45,8 @@ def main() -> None:
     print(f"Item list: {list(inventory.keys())}")
     print(f"Total quantity of the {len(inventory)} items:"
           f" {sum(inventory.values())}")
-    max_min: tuple[int, int] = (max(inventory.values()),
-                                min(inventory.values()))
+    max_min: tuple[int, int] = (find_max(inventory),
+                                find_min(inventory))
     max_key: str = ""
     min_key: str = ""
     for item in inventory:

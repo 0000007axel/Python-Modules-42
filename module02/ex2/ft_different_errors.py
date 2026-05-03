@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 def garden_operations(operation_number: int) -> None:
     if operation_number == 0:
         int('abc')
@@ -12,7 +15,7 @@ def garden_operations(operation_number: int) -> None:
 
 
 def test_error_types() -> None:
-    for i in range(0, 5):
+    for i in [0, 1, 2, 3, 4]:
         print(f"Testing operation {i}...")
         try:
             garden_operations(i)

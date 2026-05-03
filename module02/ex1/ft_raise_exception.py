@@ -1,3 +1,6 @@
+#!/usr/bin/env python3.13
+
+
 def input_temperature(temp_str: str) -> int:
     int_temp: int = int(temp_str)
     if int_temp < 0:
@@ -9,7 +12,7 @@ def input_temperature(temp_str: str) -> int:
 
 
 def test_temperature() -> None:
-    print("=== Garden Temperature ===\n")
+    print("=== Garden Temperature Checker ===\n")
 
     for i in ['25', 'abc', '100', '-50']:
         print(f"Input data is '{i}'")
