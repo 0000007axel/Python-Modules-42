@@ -1,6 +1,7 @@
 #!usr/bin/env python3.13
 
 
+<<<<<<< HEAD
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -39,6 +40,18 @@ class NumericProcessor(DataProcessor):
 
 class TextProcessor(DataProcessor):
     ...
+=======
+from abc import ABC
+
+
+class DataProcessor(ABC):
+    def __init__(self) -> None:
+        processed_data: list[Any] = []
+
+
+def main() -> None:
+    print("=== Garden Data Processor ===")
+>>>>>>> 6dee27c85148b3bffa23ece489d111e6ac85b62b
 
 class LogProcessor(DataProcessor):
     ...
