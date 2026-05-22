@@ -18,7 +18,7 @@ class DataProcessor(ABC):
         pass
 
     def output(self) -> tuple[int, str]:
-        ...
+        print("do smth")
 
 
 class NumericProcessor(DataProcessor):
