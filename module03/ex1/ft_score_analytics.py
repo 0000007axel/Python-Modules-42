@@ -25,7 +25,7 @@ def create_list() -> list[int]:
     i = 0
     while i < len(sys.argv) - 1:
         try:
-            scores.append(int(sys.argv[i + 1]))
+            scores += [int(sys.argv[i + 1])]
             i = i + 1
         except ValueError:
             print(f"Invalid parameter: '{sys.argv[i + 1]}'")
