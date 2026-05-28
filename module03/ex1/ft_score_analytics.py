@@ -39,12 +39,13 @@ def create_list() -> list[int]:
 
 def get_infos(scores: list[int]) -> None:
     if len(scores) > 0:
-        print(f"Total players: {len(scores)}")
-        print(f"Total score: {sum(scores)}")
-        print(f"Average score: {sum(scores) / len(scores)}")
-        print(f"High score: {find_max(scores)}")
-        print(f"Low score: {find_min(scores)}")
-        print(f"Score range: {find_max(scores) - find_min(scores)}")
+        print(f"""Total players: {len(scores)}
+Total score: {sum(scores)}
+Average score: {sum(scores) / len(scores)}
+High score: {find_max(scores)}
+Low score: {find_min(scores)}
+Score range: {find_max(scores) - find_min(scores)}
+""")
 
 
 def main() -> None:
