@@ -19,8 +19,8 @@ def create_coords() -> list[str]:
 def get_player_pos() -> tuple[float, float, float]:
     while True:
         xyz: list[float] = [0, 0, 0]
-        usr_xyz: list[str] = create_coords()
         try:
+            usr_xyz: list[str] = create_coords()
             for i in [0, 1, 2]:
                 xyz[i] = float(usr_xyz[i])
             return (float(xyz[0]), float(xyz[1]), float(xyz[2]))
@@ -30,6 +30,12 @@ def get_player_pos() -> tuple[float, float, float]:
         except TypeError:
             print("Invalid syntax")
             continue
+        except KeyboardInterrupt:
+            print("\nUsing default value (0, 0, 0)")
+            return(0,0,0)
+        except EOFError:
+            print("\nUsing default value(0,0,0)")
+            return(0,0,0)
 
 
 def calculate_distance(p1: tuple[float, float, float],
