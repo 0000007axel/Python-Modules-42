@@ -32,10 +32,10 @@ def get_player_pos() -> tuple[float, float, float]:
             continue
         except KeyboardInterrupt:
             print("\nUsing default value (0, 0, 0)")
-            return(0,0,0)
+            return (0, 0, 0)
         except EOFError:
             print("\nUsing default value(0,0,0)")
-            return(0,0,0)
+            return (0, 0, 0)
 
 
 def calculate_distance(p1: tuple[float, float, float],

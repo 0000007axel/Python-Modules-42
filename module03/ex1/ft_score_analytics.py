@@ -10,7 +10,7 @@ def create_list() -> list[int]:
     while i < len(sys.argv) - 1:
         try:
             if int(sys.argv[i + 1]) > 9999999999:
-                raise(ValueError("Number too large"))
+                raise (ValueError("Number too large"))
             scores.append(int(sys.argv[i + 1]))
             i = i + 1
         except ValueError:
@@ -23,6 +23,7 @@ def create_list() -> list[int]:
         print("No scores provided. ", end="")
         print("Usage: python3 ft_score_analytics.py, <score1> <score2> ...")
     return scores
+
 
 def get_infos(scores: list[int]) -> None:
     if len(scores) > 0:
