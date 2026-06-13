@@ -24,7 +24,7 @@ def create_inventory() -> dict[str, int]:
     inventory = {}
     if len(sys.argv) < 2:
         print("No arguments were passed")
-        return(inventory)
+        return (inventory)
         
     for arg in sys.argv[1:]:
         try:
@@ -45,7 +45,7 @@ def create_inventory() -> dict[str, int]:
                     raise ValueError(f"Quantity of item '{key}' is invalid")
                 inventory[key] = int(value)
             else:
-                print(f"Redundant item {key} - Discarding")
+                print(f"Redundant item '{key}' - discarding")
         except ValueError as e:
             print(e)
     return(inventory)
@@ -54,7 +54,22 @@ def create_inventory() -> dict[str, int]:
 def main() -> None:
     print("=== Inventory System Analysis ===\n")
     inventory: dict[str, int] = create_inventory()
-    print(inventory)
+    total: int = sum(list(inventory.values()))
+    print(f"""Got inventory: {inventory}
+Item list: {list(inventory.keys())}
+Total quantity of the {len(inventory)} items: {total}
+""", end="")
+    for item in inventory:
+        percentage: float = round((100 * inventory[item]) / total, 1)
+        print(f"Item '{item}' represents {percentage}%")
+    max_items: list[str] = [pair for pair in inventory
+                            if inventory[pair] == find_max(inventory)]
+    min_items: list[str] = [pair for pair in inventory
+                            if inventory[pair] == find_min(inventory)]
+    print(f"""Item most abundant: {", ".join(max_items)}
+Item least abundant: {", ".join(min_items)}
+    """)
+
 
 if __name__ == "__main__":
     main()
