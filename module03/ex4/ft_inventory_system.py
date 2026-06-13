@@ -21,46 +21,40 @@ def find_min(usr_dict: dict[str, int]) -> int:
 
 
 def create_inventory() -> dict[str, int]:
-    pairs = sys.argv[1:]
-    inventory: dict[str, int] = {}
-    for pair in pairs:
+    inventory = {}
+    if len(sys.argv) < 2:
+        print("No arguments were passed")
+        return(inventory)
+        
+    for arg in sys.argv[1:]:
         try:
-            key: str = (pair.split(':'))[0]
-            if key in inventory.keys():
-                print(f"Redundant item: '{key}' - discarding")
-                continue
-            value: int = int((pair.split(':'))[1])
-            inventory.update({key: value})
-        except IndexError:
-            print(f"Error - invalid parameter '{pair}'")
-        except ValueError as err2:
-            print(f"Quantity error for 'key': {err2}")
-    print(f"Got inventory: {inventory}")
-    return (inventory)
+            if ':' not in arg:
+                raise ValueError(f"Invalid format for '{arg}'")
+            key, value = arg.split(":")
+            if key not in inventory:
+                if not key and not value:
+                    raise ValueError("No items were passed")
+                elif not key:
+                    raise ValueError(f"No item passed for quantity {value}")
+                elif not value:
+                    raise ValueError(f"No quantity passed for item {key}")
+                for char in value:
+                    if char not in "0123456789":
+                        raise ValueError(f"Invalid value for item '{key}'")    
+                if int(value) < 0:
+                    raise ValueError(f"Quantity of item '{key}' is invalid")
+                inventory[key] = int(value)
+            else:
+                print(f"Redundant item {key} - Discarding")
+        except ValueError as e:
+            print(e)
+    return(inventory)
 
 
 def main() -> None:
-    print("=== Inventory System Analysis ===")
+    print("=== Inventory System Analysis ===\n")
     inventory: dict[str, int] = create_inventory()
-    print(f"Item list: {list(inventory.keys())}")
-    print(f"Total quantity of the {len(inventory)} items:"
-          f" {sum(inventory.values())}")
-    max_min: tuple[int, int] = (find_max(inventory),
-                                find_min(inventory))
-    max_key: str = ""
-    min_key: str = ""
-    for item in inventory:
-        print(f"Item {item} represents"
-              f" {round(inventory[item] * 100 / sum(inventory.values()), 1)}%")
-        if inventory[item] == max_min[0]:
-            max_key = item
-        elif inventory[item] == max_min[1]:
-            min_key = item
-    print(f"Item most abundant: {max_key} with quantity {inventory[max_key]}")
-    print(f"Item least abundant: {min_key} with quantity {inventory[min_key]}")
-    inventory.update({"magic_item": 1})
-    print(f"Updated inventory: {inventory}")
-
+    print(inventory)
 
 if __name__ == "__main__":
     main()
