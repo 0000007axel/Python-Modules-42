@@ -19,12 +19,6 @@ def create_coords() -> tuple[float, float, float]:
         except TypeError:
             print("Invalid syntax")
             continue
-        except KeyboardInterrupt:
-            print("\nUsing default value (0, 0, 0)")
-            return (0, 0, 0)
-        except EOFError:
-            print("\nUsing default value(0,0,0)")
-            return (0, 0, 0)
 
 
 def calculate_distance(p1: tuple[float, float, float],
@@ -40,16 +34,21 @@ def calculate_distance(p1: tuple[float, float, float],
 
 
 def main() -> None:
-    print("""=== Game Coordinate System ===\n
+    try:
+        print("""=== Game Coordinate System ===\n
 Get a first set of coordinates\n""")
-    set1: tuple[float, float, float] = create_coords()
-    print(f"""Got a first tuple: {set1}
+        set1: tuple[float, float, float] = create_coords()
+        print(f"""Got a first tuple: {set1}
 It includes: X={set1[0]}, Y={set1[1]}, Z={set1[2]}")
 Distance to center: {calculate_distance(set1, (0, 0, 0))}\n
 Get a second set of coordinates""")
-    set2: tuple[float, float, float] = create_coords()
-    print(f"Distance between the 2 sets of coordinates: "
-          f"{calculate_distance(set1, set2)}")
+        set2: tuple[float, float, float] = create_coords()
+        print(f"Distance between the 2 sets of coordinates: "
+              f"{calculate_distance(set1, set2)}")
+    except KeyboardInterrupt:
+        print("\nThe user interrupted the program")
+    except EOFError:
+        print("\n The user interrupted the program")
 
 
 if __name__ == "__main__":
