@@ -41,7 +41,7 @@ def create_inventory() -> dict[str, int]:
                 for char in value:
                     if char not in "0123456789":
                         raise ValueError(f"Invalid value for item '{key}'")    
-                if int(value) < 0:
+                if int(value) <= 0:
                     raise ValueError(f"Quantity of item '{key}' is invalid")
                 inventory[key] = int(value)
             else:
@@ -54,21 +54,24 @@ def create_inventory() -> dict[str, int]:
 def main() -> None:
     print("=== Inventory System Analysis ===\n")
     inventory: dict[str, int] = create_inventory()
-    total: int = sum(list(inventory.values()))
-    print(f"""Got inventory: {inventory}
+    if inventory:
+        total: int = sum(list(inventory.values()))
+        print(f"""Got inventory: {inventory}
 Item list: {list(inventory.keys())}
-Total quantity of the {len(inventory)} items: {total}
+Total quantity of the {len(inventory)} items: {total}""", end="")
+        for item in inventory:
+            percentage: float = round((100 * inventory[item]) / total, 1)
+            print(f"\nItem '{item}' represents {percentage}%", end = "")
+        max_i: list[str] = [pair for pair in inventory
+                                if inventory[pair] == find_max(inventory)]
+        min_i: list[str] = [pair for pair in inventory
+                                if inventory[pair] == find_min(inventory)]
+        print(f"""
+Item most abundant: {", ".join(max_i)} with quantity {inventory[max_i[0]]}
+Item least abundant: {", ".join(min_i)} with quantity {inventory[min_i[0]]}
 """, end="")
-    for item in inventory:
-        percentage: float = round((100 * inventory[item]) / total, 1)
-        print(f"Item '{item}' represents {percentage}%")
-    max_items: list[str] = [pair for pair in inventory
-                            if inventory[pair] == find_max(inventory)]
-    min_items: list[str] = [pair for pair in inventory
-                            if inventory[pair] == find_min(inventory)]
-    print(f"""Item most abundant: {", ".join(max_items)}
-Item least abundant: {", ".join(min_items)}
-    """)
+        inventory.update({"magic_item": 1})
+        print(f"Updated inventory: {inventory}")
 
 
 if __name__ == "__main__":
