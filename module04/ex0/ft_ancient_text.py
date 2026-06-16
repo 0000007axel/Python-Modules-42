@@ -17,7 +17,7 @@ def main() -> None:
         f.close()
         print(f"File '{sys.argv[1]}' closed")
     except Exception as e:
-        print(f"Error opening file '{sys.argv[1]}: {e}")
+        print(f"Error opening file '{sys.argv[1]}': {e}")
 
 
 if __name__ == "__main__":
