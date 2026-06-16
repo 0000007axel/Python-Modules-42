@@ -23,14 +23,16 @@ def create_coords() -> tuple[float, float, float]:
 
 def calculate_distance(p1: tuple[float, float, float],
                        p2: tuple[float, float, float]) -> float:
-    try:
-        dist: float = round(math.sqrt((p2[0]-p1[0])**2
-                                      + (p2[1]-p1[1])**2
-                                      + (p2[2]-p1[2])**2),
-                            4)
-        return dist
-    except OverflowError as e:
-        print(e)
+    while True:
+        try:
+            dist: float = round(math.sqrt((p2[0]-p1[0])**2
+                                          + (p2[1]-p1[1])**2
+                                          + (p2[2]-p1[2])**2),
+                                4)
+            return dist
+        except OverflowError as e:
+            print(e)
+            continue
 
 
 def main() -> None:

@@ -2,14 +2,14 @@
 
 
 import random
-import typing
+from typing import Generator
 
 
 def gen_event(names: list[str],
-              actions: list[str]) -> typing.Generator:
+              act: list[str]) -> Generator[tuple[str, str], None, None]:
     while True:
         rand_name: str = random.choice(names)
-        rand_action: str = random.choice(actions)
+        rand_action: str = random.choice(act)
         yield (rand_name, rand_action)
 
 
@@ -22,12 +22,14 @@ def create_event_list(names: list[str],
     return (events_list)
 
 
-def consume_event(events_list: list[tuple[str, str]]) -> typing.Generator:
-    while True:
+def consume_event(
+    events_list: list[tuple[str, str]],
+) -> Generator[list[tuple[str, str]], None, None]:
+    while events_list:
         to_remove: tuple[str, str] = random.choice(events_list)
         print(f"Got event from list: {to_remove}")
         events_list.remove(to_remove)
-        yield (events_list)
+        yield events_list
 
 
 def main() -> None:
