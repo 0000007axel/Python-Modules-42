@@ -1,14 +1,14 @@
-def secure_archive(filename: str, act: str = "r", s: str = "") -> tuple[bool, str]:
+def secure_archive(file: str, act: str = "r", s: str = "") -> tuple[bool, str]:
     try:
         if act == "r":
-            with open(filename, "r") as file:
-                return(True, file.read())
+            with open(file, "r") as f:
+                return (True, f.read())
         elif act == "w":
-            with open(filename, "w") as file:
-                file.write(s)
-                return(True, "Content successfully written to file")
+            with open(file, "w") as f:
+                f.write(s)
+                return (True, "Content successfully written to file")
         else:
-            return(False, f"Invalid action {act}")
+            return (False, f"Invalid action {act}")
     except (FileNotFoundError, IsADirectoryError, PermissionError) as err:
         return (False, str(err))
 
