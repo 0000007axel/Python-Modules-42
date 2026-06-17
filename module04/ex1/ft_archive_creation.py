@@ -1,50 +1,56 @@
 import sys
-from typing import TextIO
+import typing
 
 
-def formater(text: str) -> str:
-    print("Transform data\n---\n")
-    new_formated_text: str = text.replace("\n", "#\n")
-    print(new_formated_text)
-    print("\n---")
-    return (new_formated_text)
+def reader() -> None:
+    print(f"Accessing file '{sys.argv[1]}'")
+    try:
+        file: typing.IO[str] = open(sys.argv[1], "r")
+        file_contents: str = file.read()
+        print(f"""---
+
+{file_contents}
+---
+File '{sys.argv[1]}' closed.\n""")
+        file.close()
+        new_content: str = file_contents.replace("\n", "#\n")
+        print(f"""Transform data:
+---
+
+{new_content}
+---
+""")
+        new_name: str = input("Enter new file name (or empty): ")
+        if new_name:
+            print(f"Saving data to '{new_name}'")
+            try:
+                file_w: typing.IO[str] = open(new_name, "w")
+                file_w.write(new_content)
+                file_w.close()
+                print(f"Data saved to '{new_name}'.")
+            except (FileNotFoundError,
+                    IsADirectoryError,
+                    PermissionError) as e:
+                print(f"Error on writing in file '{new_name}': {e}")
+        else:
+            print("Not writing new data.")
+
+    except (FileNotFoundError,
+            IsADirectoryError,
+            PermissionError) as e:
+        print(f"Error on opening file '{sys.argv[1]}': {e}")
 
 
 def main() -> None:
-    print("=== Cyber Archives Recovery & Preservation===")
-
-    if len(sys.argv) != 2:
-        print(f"Usage: {sys.argv[0]} <file>")
-        return
-
-    try:
-        print(f"Accessing file '{sys.argv[1]}'\n---\n")
-        f: TextIO = open(sys.argv[1], "r")
-        orig_text: str = f.read()
-        print(orig_text)
-        f.close()
-        print(f"\n---\nFile '{sys.argv[1]}' closed\n")
-        new_text: str = formater(orig_text)
-        new_filename: str = input("Enter new file name (or empty): ")
-        if len(new_filename) == 0:
-            print("Not saving data")
-            return
-        else:
-            print(f"Saving data to '{new_filename}'")
-            nf: TextIO = open(new_filename, "w")
-            nf.write(new_text)
-            nf.close()
-            print(f"Data saved in file '{new_filename}'")
-
-    except Exception as e:
-        print(f"Error opening file '{sys.argv[1]}: {e}")
+    print("=== Cyber Archives Recovery ===")
+    reader()
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\nProgram interrupted by user")
-    except EOFError:
-        print("\nProgram interrupted by user")
-
+    if len(sys.argv) != 2:
+        print("Usage: ft_ancient_text.py <file>")
+    else:
+        try:
+            main()
+        except (KeyboardInterrupt, EOFError):
+            print("\nProgram interrupted by user.")

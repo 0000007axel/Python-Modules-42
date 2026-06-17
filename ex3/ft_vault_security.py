@@ -45,7 +45,7 @@ File '{sys.argv[1]}' closed.\n""")
 
 
 def main() -> None:
-    print("=== Cyber Archives Recovery & Preservation ===")
+    print("=== Cyber Archives Recovery ===")
     reader()
 
 
