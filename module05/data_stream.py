@@ -56,13 +56,13 @@ class NumericProcessor(DataProcessor):
             return True
         elif isinstance(data, list):
             for element in data:
-                if not isinstance(element, int) and not isinstance(element, float):  # noqa: E501
+                if not isinstance(element, int) and not isinstance(element, float):
                     return False
             return True
         else:
             return False
 
-    def ingest(self, data: int | float | list[int | float] | list[int] | list[float]) -> None:  # noqa: E501
+    def ingest(self, data: int | float | list[int | float] | list[int] | list[float]) -> None:
         if self.validate(data):
             if isinstance(data, int) or isinstance(data, float):
                 self.ingested_count += 1
@@ -107,48 +107,22 @@ class LogProcessor(DataProcessor):
             raise ValueError("Got exception: Improper log data")
 
 
-def main() -> None:
-    print("=== Code Nexus - Data Processor ===\n")
-    n = NumericProcessor()
-    t = TextProcessor()
-    l = LogProcessor()  # noqa: E741
-    numbers: list[int] = [1, 2, 3, 4, 5]
-    words: list[str] = ["Hello", "Nexus", "World"]
-    logs: list[dict[str, str]] = [
-        {'log_level': 'NOTICE', 'log_message': 'Connection to server'},
-        {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'},
-    ]
-    print(f"""Trying to validate input '42': {n.validate(42)}
-Trying to validate input 'Hello': {n.validate("Hello")}
-Test invalid ingestion of string 'foo' without prior validation:""")
-    try:
-        n.ingest("foo")  # type: ignore[arg-type]
-    except ValueError as e:
-        print(e)
-    print(f"""Processing data: {numbers}
-Extracting 3 values...""")
-    n.ingest(numbers)
-    for _ in range(3):
-        rank, value = n.output()
-        print(f"Numeric value {rank}: {value}")
-    print(f"""
-Testing Text Processor...
-Trying to validate input '42': {t.validate(42)}
-Processing data: {words}
-Extracting 1 value...""")
-    t.ingest(words)
-    t_rank, t_value = t.output()
-    print(f"Text value {t_rank}: {t_value}")
-    print(f"""
-Testing log processor...
-Trying to validate input 'Hello': {l.validate("Hello")}
-Processing data: {logs}
-Extracting 2 values...""")
-    l.ingest(logs)
-    for _ in range(2):
-        l_rank, l_value = l.output()
-        print(f"Log entry {l_rank}: {l_value}")
+class DataStream():
+    def __init__(self, data_stream: Any) -> None:
+        self.data_stream: list[Any] = []
+        self.processors: list[DataProcessor] = []
 
+    def register_processor(self, proc: DataProcessor) -> None:
+        
+
+    def process_stream(self, processor: DataProcessor | list[DataProcessor]):
+        ...
+
+
+
+
+def main() -> None:
+    ...
 
 if __name__ == "__main__":
     main()
