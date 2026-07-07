@@ -113,10 +113,15 @@ class DataStream():
         self.processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
-        
+        if isinstance(proc, DataProcessor):
+            self.processors.append(proc)
 
     def process_stream(self, processor: DataProcessor | list[DataProcessor]):
         ...
+
+    def print_processors_stats(self) -> None:
+        if not self.data_stream and not self.processors:
+            print("No processors found, no data")
 
 
 
