@@ -110,13 +110,12 @@ class LogProcessor(DataProcessor):
 class DataStream():
     def __init__(self) -> None:
         self.processors: list[DataProcessor] = []
-        self.ingested_count: int = 0
 
     def register_processor(self, proc: DataProcessor) -> None:
         if isinstance(proc, DataProcessor):
             self.processors.append(proc)
 
-    def process_stream(self, stream: list[Any]):
+    def process_stream(self, stream: list[Any]) -> None:
         for data in stream:
             for processor in self.processors:
                 if processor.validate(data):
@@ -126,7 +125,9 @@ class DataStream():
                 print(f"DataStream error - Can't process element in stream: {data}")
 
     def print_processors_stats(self) -> None:
-        ...
+        for processor in self.processors:
+            print(f"{type(processor).__name__}:"
+                  f"total {processor.ingested_count} items processed, remaining {len(processor.ingested)} on processor")
 
 
 
