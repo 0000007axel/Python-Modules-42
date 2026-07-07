@@ -108,8 +108,7 @@ class LogProcessor(DataProcessor):
 
 
 class DataStream():
-    def __init__(self, data_stream: Any) -> None:
-        self.data_stream: list[Any] = []
+    def __init__(self) -> None:
         self.processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
@@ -117,27 +116,16 @@ class DataStream():
             self.processors.append(proc)
 
     def process_stream(self, stream: list[Any]):
-        for element in stream:
-            if isinstance(element, str):
-                ... #give it to a text processor
-
-            elif isinstance(element, int) or isinstance(element, float):
-                ...
-
-            elif isinstance(element, dict):
-                ...
-
-            elif isinstance(element, list):
-                ...
-
+        for data in stream:
+            for processor in self.processors:
+                if processor.validate(data):
+                    processor.ingest(data)
+                    break 
             else:
-                raise ValueError(f"Data stream error - Can't process element in stream: {element}")
-        
+                print(f"DataStream error - Can't process element in stream: {data}")
 
     def print_processors_stats(self) -> None:
-        if not self.data_stream and not self.processors:
-            print("No processors found, no data")
-
+        ...
 
 
 
