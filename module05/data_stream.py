@@ -86,7 +86,7 @@ class LogProcessor(DataProcessor):
             for element in data:
                 if isinstance(element, dict):
                     for key, value in element.items():
-                        if not isinstance(key, str) or not isinstance(value, str):  # noqa: E501
+                        if not isinstance(key, str) or not isinstance(value, str):
                             return False
                 else:
                     return False
@@ -98,11 +98,11 @@ class LogProcessor(DataProcessor):
         if self.validate(data):
             if isinstance(data, dict):
                 self.ingested_count += 1
-                self.ingested.append(f"{data['log_level']}: {data['log_message']}")  # noqa: E501
+                self.ingested.append(f"{data['log_level']}: {data['log_message']}")
             elif isinstance(data, list):
                 self.ingested_count += len(data)
                 for d in data:
-                    self.ingested.append(f"{d['log_level']}: {d['log_message']}")  # noqa: E501
+                    self.ingested.append(f"{d['log_level']}: {d['log_message']}")
         else:
             raise ValueError("Got exception: Improper log data")
 
@@ -110,6 +110,7 @@ class LogProcessor(DataProcessor):
 class DataStream():
     def __init__(self) -> None:
         self.processors: list[DataProcessor] = []
+        self.ingested_count: int = 0
 
     def register_processor(self, proc: DataProcessor) -> None:
         if isinstance(proc, DataProcessor):
