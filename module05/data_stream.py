@@ -116,8 +116,23 @@ class DataStream():
         if isinstance(proc, DataProcessor):
             self.processors.append(proc)
 
-    def process_stream(self, processor: DataProcessor | list[DataProcessor]):
-        ...
+    def process_stream(self, stream: list[Any]):
+        for element in stream:
+            if isinstance(element, str):
+                ... #give it to a text processor
+
+            elif isinstance(element, int) or isinstance(element, float):
+                ...
+
+            elif isinstance(element, dict):
+                ...
+
+            elif isinstance(element, list):
+                ...
+
+            else:
+                raise ValueError(f"Data stream error - Can't process element in stream: {element}")
+        
 
     def print_processors_stats(self) -> None:
         if not self.data_stream and not self.processors:
