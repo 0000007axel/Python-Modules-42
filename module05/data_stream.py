@@ -125,14 +125,33 @@ class DataStream():
                 print(f"DataStream error - Can't process element in stream: {data}")
 
     def print_processors_stats(self) -> None:
-        for processor in self.processors:
-            print(f"{type(processor).__name__}:"
-                  f"total {processor.ingested_count} items processed, remaining {len(processor.ingested)} on processor")
+        if not self.processors:
+            print("No processors found, no data")
+        else:
+            for processor in self.processors:
+                print(f"{type(processor).__name__}:"
+                      f"total {processor.ingested_count} items processed, remaining {len(processor.ingested)} on processor")
 
 
 
 def main() -> None:
-    ...
+    d: DataStream = DataStream()
+    print(f"""=== Code Nexus - Data Stream ===
+
+Initialize Data Stream...
+== Data Stream Statistics ==""")
+    d.print_processors_stats()
+    data_list: list[Any] = ['Hello world', [3.14, -1, 2.71],
+                            [{'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh instead'},
+                             {'log_level': 'INFO', 'log_message': 'User wil is connected'}],
+                             42, ['Hi', 'five']]
+    print(f"""
+Registering Numeric Processor
+
+Send first batch of data on stream: {data_list}""")
+    np: NumericProcessor = NumericProcessor()
+    d.register_processor(np)
+    d.process_stream(data_list)
 
 if __name__ == "__main__":
     main()
