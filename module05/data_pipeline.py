@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-from typing import Any
+from typing import Any, Protocol
 
 
 class DataProcessor(ABC):
@@ -118,11 +118,18 @@ class LogProcessor(DataProcessor):
 
 
 class ExportPlugin(Protocol):
-    def __init__(self) -> None:
-        ...
-
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
+
+class CSVExportPlugin(ExportPlugin):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        ...
+
+class JSONExportPlugin(ExportPlugin):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        ...
+
+
 
 
 
@@ -165,50 +172,7 @@ class DataStream():
 
 
 def main() -> None:
-    d: DataStream = DataStream()
-    print("""=== Code Nexus - Data Stream ===
-
-Initialize Data Stream...""")
-    d.print_processors_stats()
-    data_list: list[Any] = [
-        'Hello world',
-        [3.14, -1, 2.71],
-        [
-            {
-                'log_level': 'WARNING',
-                'log_message': 'Telnet access! Use ssh instead',
-            },
-            {'log_level': 'INFO', 'log_message': 'User wil is connected'},
-        ],
-        42,
-        ['Hi', 'five'],
-    ]
-    print(f"""
-Registering Numeric Processor
-
-Send first batch of data on stream: {data_list}""")
-    np: NumericProcessor = NumericProcessor()
-    d.register_processor(np)
-    d.process_stream(data_list)
-    d.print_processors_stats()
-    print("\nRegistering other data processors")
-    tp: TextProcessor = TextProcessor()
-    lp: LogProcessor = LogProcessor()
-    d.register_processor(tp)
-    d.register_processor(lp)
-    print("Send the same batch again")
-    d.process_stream(data_list)
-    d.print_processors_stats()
-    print(
-        "\nConsume some elements from the data processors:"
-        " Numeric 3, Text 2, Log 1"
-    )
-    for _ in range(3):
-        np.output()
-    for _ in range(2):
-        tp.output()
-    lp.output()
-    d.print_processors_stats()
+    print("=== Code Nexus - Data Pipeline ===")
 
 
 if __name__ == "__main__":
