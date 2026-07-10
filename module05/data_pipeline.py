@@ -121,17 +121,13 @@ class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
 
-class CSVExportPlugin(ExportPlugin):
+class CSVExportPlugin():
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        print(f"CSV Output: {data}")
+
+class JSONExportPlugin():
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
-
-class JSONExportPlugin(ExportPlugin):
-    def process_output(self, data: list[tuple[int, str]]) -> None:
-        ...
-
-
-
-
 
 
 class DataStream():
