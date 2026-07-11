@@ -164,7 +164,11 @@ class DataStream():
                 )
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
-        ...
+        for processor in self.processors:
+            data = []
+            for _ in range(nb):
+                data.append(processor.output())
+            plugin.process_output(data)
 
 
 
