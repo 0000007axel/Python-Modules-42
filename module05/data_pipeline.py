@@ -162,6 +162,7 @@ class DataStream():
                     f"total {processor.ingested_count} items processed, "
                     f"remaining {len(processor.ingested)} on processor"
                 )
+        print("\n")
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for processor in self.processors:
@@ -171,9 +172,35 @@ class DataStream():
             plugin.process_output(data)
 
 
-
 def main() -> None:
-    print("=== Code Nexus - Data Pipeline ===")
+    print("""=== Code Nexus - Data Pipeline ===
+
+Initialize the Data Stream...
+""")
+    ds: DataStream = DataStream()
+    ds.print_processors_stats()
+    print("Registering Processors\n")
+    np: NumericProcessor = NumericProcessor()
+    tp: TextProcessor = TextProcessor()
+    lp: LogProcessor = LogProcessor()
+    ds.register_processor(np)
+    ds.register_processor(tp)
+    ds.register_processor(lp)
+    data: list[Any] = ['Hello world', [3.14, -1, 2.71],
+                       [{'log_level': 'WARNING',
+                         'log_message': 'Telnet access! Use ssh instead'},
+                        {'log_level': 'INFO',
+                         'log_message': 'User wil is connected'}],
+                       42, ['Hi', 'five']]
+    print(f"Send first batch of data on stream: {data}\n")
+    ds.process_stream(data)
+    ds.print_processors_stats()
+    print("Send 3 processed data from each processor to a CSV plugin:")
+    csv_ep: CSVExportPlugin = CSVExportPlugin()
+    ds.output_pipeline(3, csv_ep)
+    
+
+
 
 
 if __name__ == "__main__":
