@@ -115,19 +115,20 @@ class LogProcessor(DataProcessor):
             raise ValueError("Got exception: Improper log data")
 
 
-
-
 class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
 
 class CSVExportPlugin():
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        print(f"CSV Output: {data}")
+        output = ",".join([value for key, value in data])
+        print(f"CSV Output:\n{output}")
 
 class JSONExportPlugin():
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        ...
+        values = ",".join([f'\"item_{key}\": \"{value}\"' for key, value in data])
+        output = "{" + values + "}"
+        print(f"JSON Output:\n{output}")
 
 
 class DataStream():
