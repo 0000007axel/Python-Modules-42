@@ -119,14 +119,19 @@ class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
 
+
 class CSVExportPlugin():
     def process_output(self, data: list[tuple[int, str]]) -> None:
         output = ",".join([value for key, value in data])
         print(f"CSV Output:\n{output}")
 
+
 class JSONExportPlugin():
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        values = ",".join([f'\"item_{key}\": \"{value}\"' for key, value in data])
+        values = ",".join(
+            f'\"item_{key}\": \"{value}\"'
+            for key, value in data
+        )
         output = "{" + values + "}"
         print(f"JSON Output:\n{output}")
 
@@ -200,13 +205,19 @@ Initialize the Data Stream...
     ds.output_pipeline(3, csv_ep)
     print("\n")
     ds.print_processors_stats()
-    new_data: list[Any] = [21, 
-                           ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
-                           [{'log_level': 'ERROR', 'log_message': '500 server crash'},
-                            {'log_level': 'NOTICE',
-                             'log_message': 'Certificate expires in 10 days'}],
-                           [32, 42, 64, 84, 128, 168],
-                           'World hello']
+    new_data: list[Any] = [
+        21,
+        ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
+        [
+            {'log_level': 'ERROR', 'log_message': '500 server crash'},
+            {
+                'log_level': 'NOTICE',
+                'log_message': 'Certificate expires in 10 days',
+            },
+        ],
+        [32, 42, 64, 84, 128, 168],
+        'World hello',
+    ]
     print(f"Send another batch of data: {new_data}")
     ds.process_stream(new_data)
     ds.print_processors_stats()
@@ -215,7 +226,6 @@ Initialize the Data Stream...
     ds.output_pipeline(5, json_ep)
     print("\n")
     ds.print_processors_stats()
-
 
 
 if __name__ == "__main__":
