@@ -167,7 +167,7 @@ class DataStream():
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for processor in self.processors:
             data = []
-            for _ in range(nb):
+            for _ in range(min(nb, len(processor.ingested))):
                 data.append(processor.output())
             plugin.process_output(data)
 
@@ -196,10 +196,25 @@ Initialize the Data Stream...
     ds.process_stream(data)
     ds.print_processors_stats()
     print("Send 3 processed data from each processor to a CSV plugin:")
-    csv_ep: CSVExportPlugin = CSVExportPlugin()
+    csv_ep = CSVExportPlugin()
     ds.output_pipeline(3, csv_ep)
-    
-
+    print("\n")
+    ds.print_processors_stats()
+    new_data: list[Any] = [21, 
+                           ['I love AI', 'LLMs are wonderful', 'Stay healthy'],
+                           [{'log_level': 'ERROR', 'log_message': '500 server crash'},
+                            {'log_level': 'NOTICE',
+                             'log_message': 'Certificate expires in 10 days'}],
+                           [32, 42, 64, 84, 128, 168],
+                           'World hello']
+    print(f"Send another batch of data: {new_data}")
+    ds.process_stream(new_data)
+    ds.print_processors_stats()
+    print("Send 5 processed fata from each processor to a JSON plugin:")
+    json_ep = JSONExportPlugin()
+    ds.output_pipeline(5, json_ep)
+    print("\n")
+    ds.print_processors_stats()
 
 
 
