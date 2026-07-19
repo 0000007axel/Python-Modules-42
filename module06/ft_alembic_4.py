@@ -7,5 +7,5 @@ Accessing the alchemy module using 'import alchemy'
 Testing create_air: {alchemy.create_air()}
 Now show that not all functions can be reached
 This will raise an exception!
-Testing the hidden create_earth: Traceback (most recent call last):
-{alchemy.create_earth()}""")
+Testing the hidden create_earth: Traceback (most recent call last):""")
+    print(f"{alchemy.create_earth()}")
