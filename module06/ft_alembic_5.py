@@ -1,11 +1,7 @@
-from alchemy import create_air
-
-
-def test_air() -> None:
-    print(f"""=== Alembic 5 ===
-Accessing the alchemy module using 'from alchemy import ...
-Testing create_air: {create_air()}\n""")
+from alchemy import elements
 
 
 if __name__ == "__main__":
-    test_air()
+    print(f"""=== Alembic 5 ===
+Accessing the alchemy module using 'from alchemy import ...'
+Testing create_air: {elements.create_air()}""")
