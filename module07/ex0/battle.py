@@ -22,15 +22,6 @@ class Flameling(Creature):
         return f"{self._name} uses Ember!"
 
 
-class Aquabub(Creature):
-    def __init__(self) -> None:
-        super().__init__("Aquabub", "Water")
-
-    
-    def attack(self) -> str:
-        return f"{self._name} uses Water Gun!"
-
-
 class Pyrodon(Creature):
     def __init__(self) -> None:
         super().__init__("Pyrodon", "Water")
@@ -40,10 +31,59 @@ class Pyrodon(Creature):
         return f"{self._name} uses Flamethrower!"
 
 
+class Aquabub(Creature):
+    def __init__(self) -> None:
+        super().__init__("Aquabub", "Water")
+
+    
+    def attack(self) -> str:
+        return f"{self._name} uses Water Gun!"
+
+
 class Torragon(Creature):
     def __init__(self) -> None:
         super().__init__("Torragon", "Water")
 
     
     def attack(self) -> str:
-        return f"{self._name} uses !"
+        return f"{self._name} uses Hydro Pump!"
+
+
+class CreatureFactory(ABC):
+    def __init__(self, starter: Creature) -> None:
+        self._starter = starter
+
+    @abstractmethod
+    def create_base(self, evolved_creature: Creature) -> Creature:
+        ...
+
+    @abstractmethod
+    def create_evolved(self, base_creature) -> Creature:
+        ...
+
+
+class FlameFactory(CreatureFactory):
+
+    def create_base(self, name) -> Flameling:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
