@@ -10,8 +10,8 @@ class Creature(ABC):
     def attack(self) -> str:
         ...
 
-    def describe(self):
-        print(f"{self._name} is a {self._type} type Creature")
+    def describe(self) -> str:
+        return f"{self._name} is a {self._type} type Creature"
 
 
 class Flameling(Creature):
@@ -24,7 +24,7 @@ class Flameling(Creature):
 
 class Pyrodon(Creature):
     def __init__(self) -> None:
-        super().__init__("Pyrodon", "Water")
+        super().__init__("Pyrodon", "Fire/Flying")
 
     
     def attack(self) -> str:
@@ -50,23 +50,33 @@ class Torragon(Creature):
 
 
 class CreatureFactory(ABC):
-    def __init__(self, starter: Creature) -> None:
-        self._starter = starter
-
     @abstractmethod
-    def create_base(self, evolved_creature: Creature) -> Creature:
+    def create_base(self) -> Creature:
         ...
 
     @abstractmethod
-    def create_evolved(self, base_creature) -> Creature:
+    def create_evolved(self) -> Creature:
         ...
 
 
 class FlameFactory(CreatureFactory):
+    def create_base(self) -> Flameling:
+        flameling: Flameling = Flameling()
+        return flameling
 
-    def create_base(self, name) -> Flameling:
+    def create_evolved(self) -> Pyrodon:
+        pyrodon: Pyrodon = Pyrodon()
+        return pyrodon
 
 
+class AquaFactory(CreatureFactory):
+    def create_base(self) -> Aquabub:
+        aquabub: Aquabub = Aquabub()
+        return aquabub
+
+    def create_evolved(self) -> Torragon:
+        torragon: Torragon = Torragon()
+        return torragon
 
 
 
