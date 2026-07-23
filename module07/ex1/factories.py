@@ -11,10 +11,13 @@ class Creature(ABC):
         ...
 
     def describe(self) -> str:
-        return f"{self._name} is a {self._type} type Creature"
+        return f"{self.get_name()} is a {self.get_type()} type Creature"
 
     def get_name(self) -> str:
         return self._name
+
+    def get_type(self) -> str:
+        return self._type
 
 
 class Flameling(Creature):
@@ -22,7 +25,7 @@ class Flameling(Creature):
         super().__init__("Flameling", "Fire")
     
     def attack(self) -> str:
-        return f"{self._name} uses Ember!"
+        return f"{self.get_name()} uses Ember!"
 
 
 class Pyrodon(Creature):
@@ -31,7 +34,7 @@ class Pyrodon(Creature):
 
     
     def attack(self) -> str:
-        return f"{self._name} uses Flamethrower!"
+        return f"{self.get_name()} uses Flamethrower!"
 
 
 class Aquabub(Creature):
@@ -40,7 +43,7 @@ class Aquabub(Creature):
 
     
     def attack(self) -> str:
-        return f"{self._name} uses Water Gun!"
+        return f"{self.get_name()} uses Water Gun!"
 
 
 class Torragon(Creature):
@@ -49,7 +52,7 @@ class Torragon(Creature):
 
     
     def attack(self) -> str:
-        return f"{self._name} uses Hydro Pump!"
+        return f"{self.get_name()} uses Hydro Pump!"
 
 
 class CreatureFactory(ABC):
@@ -82,6 +85,41 @@ class AquaFactory(CreatureFactory):
         return torragon
 
 
+class HealCapability(ABC):
+    @abstractmethod
+    def heal(self, target: Creature) -> str:
+        ...
+
+
+class TransformCapability(ABC):
+    @abstractmethod
+    def transform(self) -> str:
+        ...
+
+    @abstractmethod
+    def revert(self) -> str:
+        ...
+
+class Sproutling(Creature, HealCapability):
+    def __init__(self):
+        super().__init__("Sproutling", "Grass")
+
+    def attack(self) -> str:
+        return f"{self.get_name()} uses Vine Whip!"
+
+    def heal(self) -> str:
+        return f"{self.get_name()} heals itself for a small amount"
+
+
+class Bloomelle(Creature, HealCapability):
+    def __init__(self):
+        super().__init__("Bloomelle", "Grass/Fairy")
+
+    def attack(self) -> str:
+        return f"{self.get_name()} uses Petal Dance!"
+
+    def heal(self) -> str:
+        return f"{self.get_name()} heals itself and others for a large amount"
 
 
 
@@ -93,10 +131,5 @@ class AquaFactory(CreatureFactory):
 
 
 
-
-
-
-
-
-
+k
 
