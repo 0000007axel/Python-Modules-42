@@ -1,4 +1,6 @@
-import battle
+from .factories import CreatureFactory, FlameFactory, AquaFactory
 
 
-__all__ = ["battle"]
+__all__ = ["CreatureFactory",
+           "FlameFactory",
+           "AquaFactory"]
