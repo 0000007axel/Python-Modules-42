@@ -128,6 +128,7 @@ class Bloomelle(Creature, HealCapability):
 class Shiftling(Creature, TransformCapability):
     def __init__(self) -> None:
         Creature.__init__(self, "Shiftling", "Normal")
+        TransformCapability.__init__(self)
 
     def attack(self) -> str:
         if self.is_sharp:
@@ -153,6 +154,7 @@ class Shiftling(Creature, TransformCapability):
 class Morphagon(Creature, TransformCapability):
     def __init__(self) -> None:
         Creature.__init__(self, "Morphagon", "Normal/Dragon")
+        TransformCapability.__init__(self)
 
     def attack(self) -> str:
         if self.is_sharp:
