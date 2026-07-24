@@ -131,9 +131,9 @@ class Shiftling(Creature, TransformCapability):
 
     def attack(self) -> str:
         if self.is_sharp:
-            return f"{self.get_name()} attacks normally."
-        else:
             return f"{self.get_name()} performs a boosted strike."
+        else:
+            return f"{self.get_name()} attacks normally."
 
     def transform(self) -> str:
         if not self.is_sharp:
@@ -150,8 +150,46 @@ class Shiftling(Creature, TransformCapability):
             return f"{self.get_name()} is already in its normal form."
 
 
+class Morphagon(Creature, TransformCapability):
+    def __init__(self) -> None:
+        Creature.__init__(self, "Morphagon", "Normal/Dragon")
+
+    def attack(self) -> str:
+        if self.is_sharp:
+            return f"{self.get_name()} performs a devastating morph strike!"
+        else:
+            return f"{self.get_name()} attacks normally."
+
+    def transform(self) -> str:
+        if not self.is_sharp:
+            self.is_sharp = True
+            return f"{self.get_name()} shifts into a dragonic battle form!"
+        else:
+            return f"{self.get_name()} is already in its dragonic form."
+
+    def revert(self) -> str:
+        if self.is_sharp:
+            self.is_sharp = False
+            return f"{self.get_name()} stabilizes its form."
+        else:
+            return f"{self.get_name()} is already in its stabilized form."
 
 
+class HealingCreatureFactory(ABC):
+    def create_base(self) -> Sproutling:
+        sproutling: Sproutling = Sproutling()
+        return sproutling
+
+    def create_evolved(self) -> Bloomelle:
+        bloomelle: Bloomelle = Bloomelle()
+        return bloomelle
 
 
+class TransformCreatureFactory(ABC):
+    def create_base(self) -> Shiftling:
+        shiftling: Shiftling = Shiftling()
+        return shiftling
 
+    def create_evolved(self) -> Morphagon:
+        morphagon: Morphagon = Morphagon()
+        return morphagon
