@@ -92,6 +92,9 @@ class HealCapability(ABC):
 
 
 class TransformCapability(ABC):
+    def __init__(self) -> None:
+        self.is_sharp: bool = False
+
     @abstractmethod
     def transform(self) -> str:
         ...
@@ -122,14 +125,33 @@ class Bloomelle(Creature, HealCapability):
         return f"{self.get_name()} heals itself and others for a large amount"
 
 
+class Shiftling(Creature, TransformCapability):
+    def __init__(self) -> None:
+        Creature.__init__(self, "Shiftling", "Normal")
+
+    def attack(self) -> str:
+        if self.is_sharp:
+            return f"{self.get_name()} attacks normally."
+        else:
+            return f"{self.get_name()} performs a boosted strike."
+
+    def transform(self) -> str:
+        if not self.is_sharp:
+            self.is_sharp = True
+            return f"{self.get_name()} shifts into a sharper form!"
+        else:
+            return f"{self.get_name()} is already in its sharp form."
+
+    def revert(self) -> str:
+        if self.is_sharp:
+            self.is_sharp = False
+            return f"{self.get_name()} returns to normal."
+        else:
+            return f"{self.get_name()} is already in its normal form."
 
 
 
 
 
 
-
-
-
-k
 
