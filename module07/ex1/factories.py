@@ -20,41 +20,6 @@ class Creature(ABC):
         return self._type
 
 
-class Flameling(Creature):
-    def __init__(self) -> None:
-        super().__init__("Flameling", "Fire")
-    
-    def attack(self) -> str:
-        return f"{self.get_name()} uses Ember!"
-
-
-class Pyrodon(Creature):
-    def __init__(self) -> None:
-        super().__init__("Pyrodon", "Fire/Flying")
-
-    
-    def attack(self) -> str:
-        return f"{self.get_name()} uses Flamethrower!"
-
-
-class Aquabub(Creature):
-    def __init__(self) -> None:
-        super().__init__("Aquabub", "Water")
-
-    
-    def attack(self) -> str:
-        return f"{self.get_name()} uses Water Gun!"
-
-
-class Torragon(Creature):
-    def __init__(self) -> None:
-        super().__init__("Torragon", "Water")
-
-    
-    def attack(self) -> str:
-        return f"{self.get_name()} uses Hydro Pump!"
-
-
 class CreatureFactory(ABC):
     @abstractmethod
     def create_base(self) -> Creature:
@@ -63,26 +28,6 @@ class CreatureFactory(ABC):
     @abstractmethod
     def create_evolved(self) -> Creature:
         ...
-
-
-class FlameFactory(CreatureFactory):
-    def create_base(self) -> Flameling:
-        flameling: Flameling = Flameling()
-        return flameling
-
-    def create_evolved(self) -> Pyrodon:
-        pyrodon: Pyrodon = Pyrodon()
-        return pyrodon
-
-
-class AquaFactory(CreatureFactory):
-    def create_base(self) -> Aquabub:
-        aquabub: Aquabub = Aquabub()
-        return aquabub
-
-    def create_evolved(self) -> Torragon:
-        torragon: Torragon = Torragon()
-        return torragon
 
 
 class HealCapability(ABC):

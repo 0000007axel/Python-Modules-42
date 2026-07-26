@@ -200,11 +200,11 @@ class TransformCreatureFactory(ABC):
 
 class BattleStrategy(ABC):
     @abstractmethod
-    def is_valid(self, creature):
+    def is_valid(self, creature: Creature):
         ...
 
     @abstractmethod
-    def act(self, creature: Creature):
+    def act(self, creature: Any):
         ...
 
 
