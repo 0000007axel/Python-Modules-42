@@ -209,23 +209,25 @@ class BattleStrategy(ABC):
 
 
 class NormalStrategy(BattleStrategy):
-    def is_valid(self, creature: Any) -> bool:
-        return isinstance(creature, Creature)
+    def is_valid(self, creature: Creature) -> bool:
+        return hasattr(creature, "attack")
 
     def act(self, creature: Any) -> None:
         if self.is_valid(creature):
-            creature.attack()
+            print(creature.attack())
 
 
 class AggressiveStrategy(BattleStrategy):
     def is_valid(self, creature: Creature) -> bool:
-        return isinstance(creature, Shiftling | Morphagon)
+        if hasattr(creature, "transform") and hasattr(creature, "attack") and hasattr(creature, "revert"):
+            return True
+        return False
 
     def act(self, creature: Any):
         if self.is_valid(creature):
-            creature.transform()
-            creature.attack()
-            creature.revert()
+            print(creature.transform())
+            print(creature.attack())
+            print(creature.revert())
         else:
             raise ValueError("Battle error, aborting tournament: "
                              f"Invalid Creature '{creature.get_name()}' "
@@ -233,31 +235,21 @@ class AggressiveStrategy(BattleStrategy):
 
 
 class DefensiveStrategy(BattleStrategy):
-    def is_valid(self, creature: Any) -> bool:
-        return isinstance(creature, Sproutling | Bloomelle)
+    def is_valid(self, creature: Creature) -> bool:
+        if hasattr(creature, "attack") and hasattr(creature, "heal"):
+            return True
+        return False
 
     def act(self, creature: Any):
         if self.is_valid(creature):
-            creature.attack()
-            creature.heal()
+            print(creature.attack())
+            print(creature.heal())
         else:
             raise ValueError("Battle error, aborting tournament: "
                              f"Invalid Creature '{creature.get_name()}' "
                              "for this defensive strategy")
 
     
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

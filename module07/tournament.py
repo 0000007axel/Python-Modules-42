@@ -1,29 +1,27 @@
-from ex0 import CreatureFactory, FlameFactory, AquaFactory
+from ex0.factories import CreatureFactory, FlameFactory, AquaFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 from ex2 import BattleStrategy, NormalStrategy, DefensiveStrategy, AggressiveStrategy
 
-
-def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]):
-    for i in range(len(opponents)):
-        for j in range(i + 1, len(opponents)):
-            factory_a, strategy_a  = opponents[i]
-            factory_b, strategy_b = opponents[j]
-            creature_a = factory_a.create_base()
-            creature_b = factory_b.create_base()
-            print(f"""{creature_a.describe()}
+def battle(opps: list[tuple[CreatureFactory, BattleStrategy]]):
+    for i in range(len(opps) - 1):
+        for j in range(i + 1, len(opps)):
+            fact_a, strat_a = opps[i]
+            fact_b, strat_b = opps[j]
+            creature_a = fact_a.create_base()
+            creature_b = fact_b.create_base()
+            print(f"""  Xx Battle xX
+{creature_a.describe()}
   vs.
 {creature_b.describe()}
-  now fight!
-{strategy_a.act(creature_a)}
-""")
-        
+  now fight!""")
+            strat_a.act(creature_a)
+            strat_b.act(creature_b)
+
+
 
 
 if __name__ == "__main__":
-    print(f"""Tournament 0 (basic)
- [ (Flameling+Normal), (Healing+Defensive) ]""")
-    f_factory: FlameFactory = FlameFactory()
-    a_factory: AquaFactory = AquaFactory()
-    h_factory: HealingCreatureFactory = HealingCreatureFactory()
-    test1= [ (f_factory, NormalStrategy), (h_factory, DefensiveStrategy) ]
-    battle(test1)
+    flame_f: FlameFactory = FlameFactory()
+    aqua_f: AquaFactory = AquaFactory()
+    n_strat = NormalStrategy()
+    battle([(flame_f, n_strat), (aqua_f, n_strat)])
