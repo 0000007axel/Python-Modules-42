@@ -10,11 +10,14 @@ def factory_tester(factory: CreatureFactory) -> bool:
 {factory.create_evolved().attack()}\n""")
         return True
     except AttributeError:
-        print(f"The argument is not valid")
+        print("The argument is not valid")
         return False
 
 
-def battle_tester(factory_one: CreatureFactory, factory_two: CreatureFactory):
+def battle_tester(
+    factory_one: CreatureFactory,
+    factory_two: CreatureFactory
+) -> None:
     print(f"""Testing battle
 {factory_one.create_base().describe()}
   vs.

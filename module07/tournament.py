@@ -1,8 +1,21 @@
 from ex0 import CreatureFactory, FlameFactory, AquaFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
-from ex2 import BattleStrategy, NormalStrategy, DefensiveStrategy, AggressiveStrategy
+from ex2 import (
+    BattleStrategy,
+    NormalStrategy,
+    DefensiveStrategy,
+    AggressiveStrategy,
+)
 
-def battle(opps: list[tuple[CreatureFactory | HealingCreatureFactory | TransformCreatureFactory, BattleStrategy]]):
+
+def battle(
+    opps: list[tuple[
+        CreatureFactory
+        | HealingCreatureFactory
+        | TransformCreatureFactory,
+        BattleStrategy,
+    ]]
+) -> None:
     print(f"{len(opps)} opponents involved")
     for i in range(len(opps) - 1):
         for j in range(i + 1, len(opps)):

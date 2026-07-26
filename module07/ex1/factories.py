@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Creature(ABC):
-    def __init__(self, name: str="Creature", type: str="Any") -> None:
+    def __init__(self, name: str = "Creature", type: str = "Any") -> None:
         self._name: str = name
         self._type: str = type
 
@@ -32,7 +32,7 @@ class CreatureFactory(ABC):
 
 class HealCapability(ABC):
     @abstractmethod
-    def heal(self, target: Creature) -> str:
+    def heal(self) -> str:
         ...
 
 
@@ -48,8 +48,9 @@ class TransformCapability(ABC):
     def revert(self) -> str:
         ...
 
+
 class Sproutling(Creature, HealCapability):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Sproutling", "Grass")
 
     def attack(self) -> str:
@@ -60,7 +61,7 @@ class Sproutling(Creature, HealCapability):
 
 
 class Bloomelle(Creature, HealCapability):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Bloomelle", "Grass/Fairy")
 
     def attack(self) -> str:
