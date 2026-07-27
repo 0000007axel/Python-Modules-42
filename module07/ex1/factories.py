@@ -123,21 +123,21 @@ class Morphagon(Creature, TransformCapability):
             return f"{self.get_name()} is already in its stabilized form."
 
 
-class HealingCreatureFactory(ABC):
-    def create_base(self) -> Sproutling:
+class HealingCreatureFactory(CreatureFactory):
+    def create_base(self) -> Creature:
         sproutling: Sproutling = Sproutling()
         return sproutling
 
-    def create_evolved(self) -> Bloomelle:
+    def create_evolved(self) -> Creature:
         bloomelle: Bloomelle = Bloomelle()
         return bloomelle
 
 
-class TransformCreatureFactory(ABC):
-    def create_base(self) -> Shiftling:
+class TransformCreatureFactory(HealingCreatureFactory):
+    def create_base(self) -> Creature:
         shiftling: Shiftling = Shiftling()
         return shiftling
 
-    def create_evolved(self) -> Morphagon:
+    def create_evolved(self) -> Creature:
         morphagon: Morphagon = Morphagon()
         return morphagon

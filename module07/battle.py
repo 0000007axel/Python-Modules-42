@@ -9,7 +9,7 @@ def factory_tester(factory: CreatureFactory) -> bool:
 {factory.create_evolved().describe()}
 {factory.create_evolved().attack()}\n""")
         return True
-    except AttributeError:
+    except ValueError:
         print("The argument is not valid")
         return False
 
