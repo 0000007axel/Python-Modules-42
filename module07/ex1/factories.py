@@ -124,20 +124,20 @@ class Morphagon(Creature, TransformCapability):
 
 
 class HealingCreatureFactory(CreatureFactory):
-    def create_base(self) -> Creature:
+    def create_base(self) -> Sproutling:
         sproutling: Sproutling = Sproutling()
         return sproutling
 
-    def create_evolved(self) -> Creature:
+    def create_evolved(self) -> Bloomelle:
         bloomelle: Bloomelle = Bloomelle()
         return bloomelle
 
 
-class TransformCreatureFactory(HealingCreatureFactory):
-    def create_base(self) -> Creature:
+class TransformCreatureFactory(CreatureFactory):
+    def create_base(self) -> Shiftling:
         shiftling: Shiftling = Shiftling()
         return shiftling
 
-    def create_evolved(self) -> Creature:
+    def create_evolved(self) -> Morphagon:
         morphagon: Morphagon = Morphagon()
         return morphagon
