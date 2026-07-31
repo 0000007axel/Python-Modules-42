@@ -1,19 +1,25 @@
-import pandas
-import matplotlib
-import numpy
-import sys
+import importlib
 
 
-def import_checker(modules: list[str]) -> bool:
+def importer(modules: list[str]) -> None:
     for module in modules:
-        if module not in sys.modules:
-            print(f"Module '{module}' not loaded.")
-        else:
-            print(f"")
+        try:
+            mod = importlib.import_module(module)
+            print(f"[OK] {module} ({mod.__version__}) - ", end="")
+            if module == "pandas":
+                print("Data manipulation ready")
+            elif module == "numpy":
+                print("Numerical computation ready")
+            elif module == "requests":
+                print("Newtork access ready")
+            elif module == "matplotlib":
+                print("Visualisation ready")
+            else:
+                print("Module imported successfully")
+
+        except ModuleNotFoundError:
+            print(f"[FAILURE] - Failed to import module '{module}'")
+
 
 if __name__ == "__main__":
-    print(f"""
-LOADING STATUS: Loading Programs...
-
-CHECKING DEPENDENCIES:
-          """)
+    importer(["pandas", "numpy", "requests", "matplotlib"])
