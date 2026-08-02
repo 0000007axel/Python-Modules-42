@@ -1,0 +1,19 @@
+[project]
+name = "ex1"
+version = "0.1.0"
+description = "A simple introduction to Poetry"
+authors = [
+    {name = "Seth Axel", email = "seramaro@student.42antananarivo.mg"}
+]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy"
+    "pandas",
+    "matplotlib"
+    "requests",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
