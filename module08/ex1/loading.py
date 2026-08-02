@@ -46,14 +46,15 @@ if __name__ == "__main__":
         mpl = imported["matplotlib.pyplot"]
         rq = imported.get("requests")
 
-        data = np.random.rand(1000)
-        df = pd.DataFrame(data, columns=["value"])
+        data = np.random.rand(1000)  # type: ignore[attr-defined]
+        df = pd.DataFrame(data,  # type: ignore[attr-defined]
+                          columns=["value"])
 
         print(f"Processing {len(df)} data points...")
         print("Generating visualisation...")
-        mpl.hist(df["value"], bins=30)
-        mpl.title("Matrix Data Analysis")
-        mpl.savefig("heheheh.png")
+        mpl.hist(df["value"], bins=30)  # type: ignore[attr-defined]
+        mpl.title("Matrix Data Analysis")  # type: ignore[attr-defined]
+        mpl.savefig("heheheh.png")  # type: ignore[attr-defined]
         print("Analysis complete!")
         print("Results saved to: heheheh.png")
     else:
