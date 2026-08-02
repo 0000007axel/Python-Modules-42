@@ -1,13 +1,12 @@
 import importlib
 from importlib.metadata import version
-import sys
 
 
-def version_checker(package: str) -> str:
-    return version(package)
+def ver_check(package: str) -> str:
+    return version(package.split(".")[0])
 
 
-def import_checker(module: str) -> bool:
+def import_checker(module: str) -> object | None:
     module_description: str = 'Successfully imported the module'
 
     if module == "pandas":
@@ -15,29 +14,47 @@ def import_checker(module: str) -> bool:
     elif module == "numpy":
         module_description = "Numerical computation ready"
     elif module == "requests":
-        module_description = "Newtork access ready"
-    elif module == "matplotlib":
+        module_description = "Network access ready"
+    elif module == "matplotlib.pyplot":
         module_description = "Visualisation ready"
     else:
         module_description = "Module imported successfully"
+
     try:
-        importlib.import_module(module)
-        print(f"[OK] {module} ({version_checker(module)}) - " + module_description)
-        return True
+        mod = importlib.import_module(module)
+        print(f"[OK] {module.split('.')[0]} ({ver_check(module)}) - " +
+              module_description)
+        return mod
     except ModuleNotFoundError:
         print(f"[FAILURE] - Failed to import module '{module}'")
-        return False
+        return None
 
 
 if __name__ == "__main__":
-    mandatory = ["pandas", "numpy", "requests", "matplotlib"]
-    imported = []
-    for module in mandatory:
+    mandatory = ["pandas", "numpy", "matplotlib.pyplot"]
+    modules = ["pandas", "numpy", "matplotlib.pyplot", "requests"]
+    imported = {}
+
+    for module in modules:
         found = import_checker(module)
         if found:
-            imported.append(module)
-    if mandatory not in imported:
-        sys.exit()
+            imported[module] = found
 
-        
+    if set(mandatory).issubset(imported):
+        np = imported["numpy"]
+        pd = imported["pandas"]
+        mpl = imported["matplotlib.pyplot"]
+        rq = imported.get("requests")
 
+        data = np.random.rand(1000)
+        df = pd.DataFrame(data, columns=["value"])
+
+        print(f"Processing {len(df)} data points...")
+        print("Generating visualisation...")
+        mpl.hist(df["value"], bins=30)
+        mpl.title("Matrix Data Analysis")
+        mpl.savefig("heheheh.png")
+        print("Analysis complete!")
+        print("Results saved to: heheheh.png")
+    else:
+        print("Missing dependencies UwU\nCannot proceed")
