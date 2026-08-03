@@ -26,8 +26,6 @@ Current Python: {sys.executable}
 Virtual environment: {sys.prefix.split('/')[-1]}
 Environment Path: {sys.prefix}
 
-WARNING: You're in the global environment
-
 SUCCESS: You're in an isolated environment!
 Safe to install packages without affecting
 the global system.

@@ -58,4 +58,13 @@ if __name__ == "__main__":
         print("Analysis complete!")
         print("Results saved to: heheheh.png")
     else:
-        print("Missing dependencies UwU\nCannot proceed")
+        print("""\nMissing some dependencies XwX\n
+To run the program, you can choose between pip and Poetry:
+  - Pip:
+pip install -r requirements.txt
+python3 loading.py
+
+  - Poetry:
+poetry install
+poetry run python3 loading.py
+""")
