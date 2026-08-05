@@ -1,16 +1,16 @@
 [project]
 name = "loading"
 version = "0.1.0"
-description = "A simple introduction to Poetry"
+description = ""
 authors = [
-    {name = "Axl",email = "sethaxel7000@gmail.com"}
+    {name = "Your Name",email = "you@example.com"}
 ]
 requires-python = ">=3.10"
 dependencies = [
-    "numpy (>=1.25)",
-    "pandas (>=2.1.0)",
-    "matplotlib (>=3.7.2)",
-    "requests (>=2.31.0)"
+    "numpy==2.2.6",
+    "matplotlib==3.10.6",
+    "pandas==2.3.2",
+    "requests==2.32.5",
 ]
 
 

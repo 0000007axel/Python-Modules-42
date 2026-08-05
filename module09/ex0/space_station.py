@@ -11,23 +11,17 @@ Try 'pip install pydantic' in your environment
 """)
     exit()
 
-try:
-    class SpaceStation(BaseModel):
-        station_id: Annotated[str, Field(min_length=3, max_length=10)]
-        name: Annotated[str, Field(min_length=1, max_length=50)]
-        crew_size: Annotated[int, Field(ge=1, le=20)]
-        power_level: Annotated[float, Field(ge=0.0, le=100)]
-        oxygen_level: Annotated[float, Field(ge=0.0, le=100)]
-        last_maintenance: datetime
-        is_operational: bool = True
-        notes: Annotated[str | None, Field(max_length=200)]
-except NameError:
-    print("""
-Could not import the pydantic module
 
-Try 'pip install pydantic' in your environment
-""")
-    exit()
+class SpaceStation(BaseModel):
+    station_id: Annotated[str, Field(min_length=3, max_length=10)]
+    name: Annotated[str, Field(min_length=1, max_length=50)]
+    crew_size: Annotated[int, Field(ge=1, le=20)]
+    power_level: Annotated[float, Field(ge=0.0, le=100)]
+    oxygen_level: Annotated[float, Field(ge=0.0, le=100)]
+    last_maintenance: Annotated[datetime, Field()]
+    is_operational: Annotated[bool, Field(default = True)]
+    notes: Annotated[str | None, Field(max_length=200)]
+
 
 def main() -> None:
     print(f"""
@@ -60,17 +54,10 @@ Status: {'Operational' if valid.is_operational else 'Non-Operational'}
                                              is_operational=True,
                                              notes="")
         print(invalid)
-    except NameError:
-        print("""
-    Could not import the pydantic module
-
-    Try 'pip install pydantic' in your environment
-    """)
     except ValidationError as e:
         print("Caught validation error" + ("s" if len(e.errors()) > 1 else ""))
         for error in e.errors():
             print(error['loc'][0] + ": " + error['msg'])
-
 
 
 if __name__ == "__main__":
