@@ -2,7 +2,7 @@ from typing import Annotated
 from datetime import datetime
 from sys import exit
 try:
-    from pydantic import BaseModel, Field, ValidationError  # type: ignore
+    from pydantic import BaseModel, Field, ValidationError
 except ModuleNotFoundError:
     print("""
 Could not import the pydantic module
@@ -19,7 +19,7 @@ class SpaceStation(BaseModel):
     power_level: Annotated[float, Field(ge=0.0, le=100)]
     oxygen_level: Annotated[float, Field(ge=0.0, le=100)]
     last_maintenance: Annotated[datetime, Field()]
-    is_operational: Annotated[bool, Field(default = True)]
+    is_operational: Annotated[bool, Field(default=True)]
     notes: Annotated[str | None, Field(max_length=200)]
 
 
@@ -57,7 +57,7 @@ Status: {'Operational' if valid.is_operational else 'Non-Operational'}
     except ValidationError as e:
         print("Caught validation error" + ("s" if len(e.errors()) > 1 else ""))
         for error in e.errors():
-            print(error['loc'][0] + ": " + error['msg'])
+            print(f"{error['loc'][0]}: {error['msg']}")
 
 
 if __name__ == "__main__":
