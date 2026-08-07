@@ -25,7 +25,7 @@ class ContactType(Enum):
 
 class AlienContact(BaseModel):
     contact_id: Annotated[str, Field(min_length=5, max_length=15)]
-    timestamp: Annotated[datetime, Field(default_factory=datetime.now())]
+    timestamp: Annotated[datetime, Field(default=datetime.now)]
     location: Annotated[str, Field(min_length=3, max_length=100)]
     contact_type: Annotated[ContactType, Field()]
     signal_strength: Annotated[float, Field(ge=0.0, le=10.0)]
