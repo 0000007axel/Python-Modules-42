@@ -31,7 +31,7 @@ class AlienContact(BaseModel):
     signal_strength: Annotated[float, Field(ge=0.0, le=10.0)]
     duration_minutes: Annotated[int, Field(ge=1, le=1440)]
     witness_count: Annotated[int, Field(ge=1, le=100)]
-    message_received: Annotated[str | None, Field()]
+    message_received: Annotated[str | None, Field(max_length=500)]
     is_verified: Annotated[bool, Field(default=False)]
 
     @model_validator(mode='after')
@@ -52,7 +52,7 @@ def main() -> None:
     try:
         valid: AlienContact = AlienContact(contact_id="AC_2024_01",
                                            location="Area 51, Nevada",
-                                           contact_type=ContactType.R,
+                                           contact_type=ContactType.R.value,
                                            signal_strength=8.5,
                                            duration_minutes=45,
                                            witness_count=5,
@@ -77,7 +77,7 @@ Message: {valid.message_received}
     try:
         invalid: AlienContact = AlienContact(contact_id="AC_2024_01",
                                              location="Area 51, Nevada",
-                                             contact_type=ContactType.R,
+                                             contact_type=ContactType.R.value,
                                              signal_strength=9000,
                                              duration_minutes=45,
                                              witness_count=5,
